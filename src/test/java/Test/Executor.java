@@ -2,18 +2,22 @@ package Test;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 
-@CucumberOptions(
-
-        features = "src/test/resources/features",
+@CucumberOptions(features = "src/test/resources/features",
 glue = "Steps",
-plugin = "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm")
+        plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+        ,publish = true)
+
 public class Executor extends AbstractTestNGCucumberTests {
 
-    @Override
-    @DataProvider(parallel = true)
-    public Object[][] scenarios() {
-        return super.scenarios();
+
+    public static String browser;
+    @Parameters("browser")
+    @BeforeTest
+    public void getBrowser(String browser){
+        this.browser = browser;
     }
 }

@@ -25,19 +25,25 @@
       <dependency>
           <groupId>io.cucumber</groupId>
           <artifactId>cucumber-java</artifactId>
-          <version>5.6.0</version>
+          <version>6.6.0</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
       <dependency>
           <groupId>io.cucumber</groupId>
           <artifactId>cucumber-testng</artifactId>
-          <version>5.6.0</version>
+          <version>6.6.0</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber5-jvm -->
       <dependency>
           <groupId>io.qameta.allure</groupId>
           <artifactId>allure-cucumber5-jvm</artifactId>
           <version>2.13.3</version>
+      </dependency>
+      <dependency>
+          <groupId>tech.grasshopper</groupId>
+          <artifactId>extentreports-cucumber6-adapter</artifactId>
+          <version>2.0.0</version>
+          <scope>test</scope>
       </dependency>
   </dependencies>
     <build>

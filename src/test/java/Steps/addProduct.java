@@ -3,14 +3,18 @@ package Steps;
 import Pages.CartPage;
 import Pages.HomePage;
 import Pages.WelcomePage;
+import Test.Executor;
 import Utils.BasePage;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.Reporter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,15 +25,14 @@ public class addProduct {
     CartPage cartPage;
     @Then("^I will open a application in \"(.*)\" browser")
     public void iWillOpenBrowser(String browser){
-        BasePage.setDriver(browser);
+        BasePage.setDriver(Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browser"));
         driver = BasePage.getDriver();
-        driver.get("https://ecom-optimus.myshopify.com/");
+        driver.get("https://www.google.com/");
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
     @When("^I login to the application with password \"(.*)\"")
     public void iLoginToTheApplicationWithPassword(String password) {
-        welcomePage = new WelcomePage();
-        homePage=welcomePage.loginWithPassword(password);
+        driver.findElement(By.name("q")).sendKeys(password);
     }
 
     @Then("^I search the product \"(.*)\"")
@@ -83,11 +86,17 @@ public class addProduct {
     public void iVerifySubtotalAmout(){
         cartPage.verifyTotalAmt();
     }
+    @AfterStep
+    public void screenShot(Scenario scenario){
+        byte[] screeshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screeshot,"image/png","error");
+
+    }
     @After
     public void tearDown(Scenario scenario){
         if(scenario.isFailed()){
             byte[] screeshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-            scenario.embed(screeshot,"image/png");
+            scenario.attach(screeshot,"image/png","error");
         }
 
         BasePage.getDriver().quit();

@@ -3,3 +3,4 @@ out
 allure-results
 target/
 build
+test-output
