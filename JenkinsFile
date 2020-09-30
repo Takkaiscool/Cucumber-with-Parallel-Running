@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Launching Grid"){
+            steps{
+                sh "docker-compose up"
+            }
+        }
+        stage("Running Tests"){
+            steps{
+                sh "mvn clean test"
+            }
+        }
+    }
+
+    post {
+        always {
+            sh "docker-compose down -v"
+        }
+    }
+}
