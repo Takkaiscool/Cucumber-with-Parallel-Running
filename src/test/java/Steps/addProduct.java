@@ -25,7 +25,7 @@ public class addProduct {
     CartPage cartPage;
     @Then("^I will open a application in \"(.*)\" browser")
     public void iWillOpenBrowser(String browser){
-        BasePage.setDriver(Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browser"));
+        BasePage.setDriver(Executor.browser);
         driver = BasePage.getDriver();
         driver.get("https://www.google.com/");
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

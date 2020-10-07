@@ -23,15 +23,15 @@ public class BasePage {
     public static void setDriver(String browserName){
         DesiredCapabilities capabilities =null;
         switch (browserName.toLowerCase()){
-            case "firefox":capabilities = DesiredCapabilities.firefox();
-            capabilities.setBrowserName("firefox");
+            case "firefox": driver.set(new FirefoxDriver());
             break;
-            case "chrome":capabilities = DesiredCapabilities.chrome();
-            capabilities.setBrowserName("chrome");
+            case "chrome":ChromeOptions options=new ChromeOptions();
+                options.setHeadless(true);
+                driver.set(new ChromeDriver(options));
             break;
         }
         try {
-            driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities));
+            //driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities));
         }catch (Exception e){
             e.printStackTrace();
         }

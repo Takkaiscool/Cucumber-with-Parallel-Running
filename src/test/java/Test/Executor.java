@@ -15,9 +15,8 @@ public class Executor extends AbstractTestNGCucumberTests {
 
 
     public static String browser;
-    @Parameters("browser")
-    @BeforeTest
-    public void getBrowser(String browser){
+    public Executor(String browser){
         this.browser = browser;
     }
+
 }
